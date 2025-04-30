@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Housewarming Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(135deg, #1d3557, #00cfc1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .envelope-wrapper {
+            width: 90%;
+            max-width: 500px;
+            height: 400px;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .envelope {
+            width: 100%;
+            height: 100%;
+            background: antiquewhite;
+            border-radius: 6px;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: #2196f3;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top center;
+            transition: transform 1s ease-in-out;
+            z-index: 2;
+        }
+
+        .envelope.opened .flap {
+            transform: rotateX(-180deg);
+        }
+
+        .letter {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: 92%;
+            height: 92%;
+            background: #fffefc;
+            padding: 15px;
+            border-radius: 12px;
+            overflow-y: auto;
+            opacity: 0;
+            transition: all 1s ease 0.4s;
+            z-index: 1;
+        }
+
+        .envelope.opened .letter {
+            top: 50%;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .letter img {
+            width: 100%;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 3px solid #f39c12;
+        }
+
+        .letter h1 {
+            color: #d35400;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .letter p {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin: 6px 0;
+        }
+
+        .signature {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #d32f2f;
+            text-align: right;
+        }
+
+        .click-hint {
+            margin-top: 20px;
+            color: white;
+            font-size: 1.2rem;
+            animation: blink 2s infinite;
+            text-shadow: 1px 1px 4px #000;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        /* Email Form */
+        #contact {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            padding: 30px 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
+        #contact h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        #contact label {
+            color: #fff;
+            font-size: 1.1rem;
+            display: block;
+            margin-top: 12px;
+        }
+
+        #contact input,
+        #contact textarea {
+            width: 100%;
+            padding: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-top: 4px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        #contact textarea {
+            min-height: 100px;
+        }
+
+        #contact button {
+            margin-top: 16px;
+            padding: 10px;
+            background: #00c853;
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        footer {
+            padding: 12px;
+            background-color: #1a237e;
+            color: #fff;
+            text-align: center;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        footer span {
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 4px;
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ENVELOPE SECTION -->
+    <section id="card">
+        <div class="envelope-wrapper" onclick="openEnvelope()">
+            <div class="envelope" id="envelope">
+                <div class="flap"></div>
+                <div class="letter">
+                    <img src="./siddu.png" alt="My Photo">
+                    <h1>Dear Uncle & Aunt,</h1>
+                    <p>Warmest congratulations on your new home! 🏠</p>
+                    <p>May your home be filled with laughter, love, and endless joy.</p>
+                    <p>Let every brick hold a memory, and every window let in positivity.</p>
+                    <p>We wish for peace to dwell within your walls forever.</p>
+                    <p>May this house become a home, where love grows stronger every day.</p>
+                    <p>May each corner bring comfort and every room echo with happiness.</p>
+                    <p>Let your days begin with sunlight and end with calm nights.</p>
+                    <p>May your kitchen be filled with delicious meals and good company.</p>
+                    <p>Wishing you celebrations, traditions, and unforgettable moments.</p>
+                    <p>May your garden bloom with beauty and your hearts with hope.</p>
+                    <p>Let every guest feel the warmth that you both radiate.</p>
+                    <p>This house is more than walls – it's a canvas of memories to come.</p>
+                    <p>Wishing your family countless joyful mornings and peaceful nights.</p>
+                    <p>May your new address lead to new adventures and happiness.</p>
+                    <p>Your journey has just begun – let it be filled with grace and gratitude.</p>
+                    <p>May this home witness your dreams turning into reality.</p>
+                    <p>Let it be a shelter in storms and a hub for celebrations.</p>
+                    <p>We can’t wait to visit and create joyful memories with you.</p>
+                    <p class="signature">With love and blessings always, Siddu ❤️</p>
+
+                </div>
+            </div>
+        </div>
+        <audio id="bg-music" loop>
+            <source src="./bgm.mp3" type="audio/mpeg">
+        </audio>
+
+    </section>
+
+    <!-- CONTACT FORM SECTION -->
+    <section id="contact">
+        <h2>Send Me a Message</h2>
+        <form id="contactForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="from_name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="from_email" required>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <footer>
+        © 2025 G. Siddharth — All rights reserved.
+        <span>Crafted with ❤️ for Chaithanya Mavaya & Aparna Atta</span>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        // EmailJS init
+        (function () {
+            emailjs.init("eFFnvBh7YKicvN14v");
+        })();
+
+        // Envelope open
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const music = document.getElementById('bg-music');
+            envelope.classList.toggle('opened');
+            if (envelope.classList.contains('opened')) {
+                confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+                music.play();
+            } else {
+                music.pause();
+                music.currentTime = 0;
+            }
+        }
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const music = document.getElementById('bg-music');
+            envelope.classList.toggle('opened');
+
+            if (envelope.classList.contains('opened')) {
+                confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+                music.play(); // ✅ This works only after user click
+            } else {
+                music.pause();
+                music.currentTime = 0;
+            }
+        }
+
+
+        // Email Send
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            emailjs.sendForm('service_k0zoxi9', 'template_rcmaf84', this)
+                .then(function () {
+                    alert("✅ Message sent successfully!");
+                }, function (error) {
+                    alert("❌ Failed to send message. Try again.");
+                });
+        });
+    </script>
+
+</body>
+
+</html>
